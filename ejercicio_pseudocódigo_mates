@@ -1,0 +1,25 @@
+numeros = []
+
+print('Escriba "salir" para cancelar en todo momento')
+
+while True:
+    entrada = input("Qué valores le gustaría utilizar? (separados por comas): ")
+    if entrada.lower() == "salir":
+        print("Operación cancelada.")
+        break
+    for valor in entrada.split(","):
+        valor = valor.strip()
+        try:
+            numero = int(float(valor))
+            numeros.append(numero)
+            print(f"{numero} ha sido añadido correctamente a numeros.")
+        except ValueError:
+            print(f'"{valor}" no es un número válido y será ignorado.')
+    print(f"Los valores actuales son: {numeros}")
+    print(f"La suma total es: {sum(numeros)}")
+    if numeros:
+        print(f"El promedio de la suma total es: {sum(numeros) / len(numeros)}")
+        print(f"El número mayor es: {max(numeros)}")
+        print(f"El número menor es: {min(numeros)}")
+    else:
+        print("No hay números para calcular")
