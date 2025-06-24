@@ -1,0 +1,65 @@
+class Libro:
+    def __init__(self, titulo, autor, año):
+        self.titulo = titulo
+        self.autor = autor
+        self.año = año
+
+    def __str__(self):
+        return f"{self.titulo} - {self.autor} ({self.año})"
+
+
+class Biblioteca:
+    def __init__(self):
+        self.libros = []
+
+    def agregar_libro(self):
+        titulo = input("Título del libro: ")
+        autor = input("Autor del libro: ")
+        año = input("Año del libro: ")
+        libro = Libro(titulo, autor, año)
+        self.libros.append(libro)
+        print(f"El libro '{libro}' ha sido añadido correctamente.")
+
+    def listar_libros(self):
+        if not self.libros:
+            print("No hay libros en la biblioteca.")
+        else:
+            print("Libros en la biblioteca:")
+            for libro in self.libros:
+                print(libro)
+
+    def eliminar_libros(self):
+        if not self.libros:
+            print("No hay libros para eliminar.")
+            return
+        print("Libros en la biblioteca:")
+        for idx, libro in enumerate(self.libros, 1):
+            print(f"{idx}. {libro}")
+        try:
+            opcion = int(input("¿Qué número de libro quieres eliminar? "))
+            if 1 <= opcion <= len(self.libros):
+                libro_eliminado = self.libros.pop(opcion - 1)
+                print(f"El libro '{libro_eliminado}' ha sido eliminado correctamente.")
+            else:
+                print("Opción no válida.")
+        except ValueError:
+            print("Por favor, introduce un número válido.")
+
+
+# Menú interactivo
+biblioteca = Biblioteca()
+
+while True:
+    print("\n1. Agregar libro\n2. Listar libros\n3. Eliminar libros\n4. Salir")
+    opcion = input("Elige una opción: ")
+    if opcion == "1":
+        biblioteca.agregar_libro()
+    elif opcion == "2":
+        biblioteca.listar_libros()
+    elif opcion == "3":
+        biblioteca.eliminar_libros()
+    elif opcion == "4":
+        print("¡Hasta luego!")
+        break
+    else:
+        print("Opción no válida.")
