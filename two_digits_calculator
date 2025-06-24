@@ -1,0 +1,129 @@
+import inquirer
+
+math_calculations = [
+    inquirer.List(
+        "operations",
+        message="Which mathematical operation would you prefer?",
+        choices=[
+            "Addition",
+            "Substraction",
+            "Multiplication",
+            "Division",
+            "Powers",
+            "Square Root",
+        ],
+    ),
+]
+answers = inquirer.prompt(math_calculations)
+
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+if answers["operations"] == "Addition":
+    num1 = input("What is the first number to sum up? ")
+    if not is_number(num1):
+        print("Please enter a valid number.")
+        exit()
+    num1 = float(num1)
+
+    num2 = input("What is the second number to sum up? ")
+    if not is_number(num2):
+        print("Please enter a valid number.")
+        exit()
+    num2 = float(num2)
+
+    result = num1 + num2
+    print(f"The result of {num1} + {num2} is {result}\n")
+else:
+    print("")
+
+if answers["operations"] == "Substraction":
+    num3 = input("What is the first number to substract? ")
+    if not is_number(num3):
+        print("Please enter a valid number.")
+        exit()
+    num3 = float(num3)
+
+    num4 = input("What is the second number to substract? ")
+    if not is_number(num4):
+        print("Please enter a valid number.")
+        exit()
+    num4 = float(num4)
+
+    answer = num3 - num4
+    print(f"The result of {num3} - {num4} is {answer}\n")
+
+
+if answers["operations"] == "Multiplication":
+    num5 = input("What is the first number to multiply? ")
+    if not is_number(num5):
+        print("Please enter a valid number.")
+        exit()
+    num5 = float(num5)
+
+    num6 = input("What is the second number to multiply? ")
+    if not is_number(num6):
+        print("Please enter a valid number.")
+        exit()
+    num6 = float(num6)
+    solu = num5 * num6
+    print(f"The result of {num5} * {num6} is {solu}\n")
+
+
+if answers["operations"] == "Division":
+    num7 = input("What is the dividend? ")
+    if not is_number(num7):
+        print("Please enter a valid number.")
+        exit()
+    num7 = float(num7)
+
+    num8 = input("What is the divisor? ")
+    if not is_number(num8):
+        print("Please enter a valid number.")
+        exit()
+    num8 = float(num8)
+
+    if num8 == 0:
+        print("Division by zero is not allowed.")
+        exit()
+
+    result = num7 / num8
+    print(f"The result of {num7} / {num8} is {result}\n")
+
+
+if answers["operations"] == "Powers":
+    base = input("What is the base number? ")
+    if not is_number(base):
+        print("Please enter a valid number.")
+        exit()
+    base = float(base)
+
+    exponent = input("What is the exponent? ")
+    if not is_number(exponent):
+        print("Please enter a valid number.")
+        exit()
+    exponent = float(exponent)
+
+    result = base**exponent
+    print(f"The result of {base} raised to the power of {exponent} is {result}\n")
+
+
+if answers["operations"] == "Square Root":
+    num = input("What number do you want the square root of? ")
+    if not is_number(num):
+        print("Please enter a valid number.")
+        exit()
+    num = float(num)
+
+    if num < 0:
+        print("Cannot calculate the square root of a negative number.")
+        exit()
+
+    result = num**0.5
+    print(f"The square root of {num} is {result}\n")
