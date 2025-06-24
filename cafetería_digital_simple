@@ -1,0 +1,74 @@
+import cowsay  # Imports the cowsay module, which prints fun ASCII art messages
+
+# Define the menu as a dictionary, where:
+# - The keys are the names of menu items (strings)
+# - The values are the prices (floats)
+menu = {"Coffee": 2.5, "Tea": 2.0, "Sandwich": 5.0, "Salad": 4.5, "Cake": 3.0}
+
+# Build a string that lists all menu items and their prices, each on a new line
+# f"..." is called an f-string (formatted string literal). It allows you to insert variables directly into the string using {variable}.
+# .2f formats the price to 2 decimal places (e.g., 2.5 becomes 2.50)
+menu_message = "The menu we serve today is:\n" + "\n".join(
+    [
+        f"{item}: ${price:.2f}" for item, price in menu.items()
+    ]  # List comprehension to format each menu item and price
+)
+
+# Display the menu using cowsay's daemon character
+# The message is shown in a speech bubble above an ASCII art daemon
+cowsay.daemon(f"Welcome to the Digital Cafeteria!\n {menu_message}")
+
+# Ask the user for their order and convert the input to lowercase for easier matching
+# input() gets user input as a string
+# .lower() converts the string to all lowercase letters
+user_input = input("What would you like to order? ").lower()
+
+# Initialize a list to store items found in the user's order
+ordered_items = []
+for item in menu:
+    # item.lower() converts the menu item to lowercase for case-insensitive matching
+    # Checks if the menu item appears anywhere in the user's input
+    if item.lower() in user_input:
+        ordered_items.append(item)  # Add matched item to the order list
+
+# Split the user input into words, removing punctuation for better matching
+# user_input.split() splits the input string into a list of words
+# word.strip(",.?!") removes any commas, periods, question marks, or exclamation marks from each word
+input_words = [word.strip(",.?!") for word in user_input.split()]
+
+# Initialize a list to store words that are not recognized as menu items
+not_found = []
+for word in input_words:
+    # any(item.lower() == word for item in menu) checks if the word matches any menu item exactly
+    if any(item.lower() == word for item in menu):
+        continue  # Skip if it's a menu item
+    # Skip common words that are not food items
+    if word in ["and", "a", "the", "i'd", "like", "to", "please"]:
+        continue
+    # If the word is not part of any menu item name, add it to not_found
+    # any(word in item.lower() for item in menu) checks if the word is part of any menu item name
+    if not any(word in item.lower() for item in menu):
+        not_found.append(word)
+
+# Respond based on what was found in the user's order
+if ordered_items and not not_found:
+    # All items ordered are on the menu
+    # ", ".join([...]) joins the list of items into a single string, separated by commas
+    # item.capitalize() makes sure the first letter is uppercase
+    items_str = ", ".join([item.capitalize() for item in ordered_items])
+    cowsay.daemon(f"{items_str} coming right up. Enjoy your meal!")
+elif ordered_items and not_found:
+    # Some items are on the menu, some are not
+    items_str = ", ".join([item.capitalize() for item in ordered_items])
+    not_found_str = ", ".join(not_found)
+    cowsay.daemon(
+        f"{items_str} coming right up. However, we don't serve {not_found_str} sorry."
+    )
+else:
+    # No valid menu items found in the order
+    cowsay.daemon(
+        "Sorry, we don't serve those items here. Please choose from the menu."
+    )
+
+# Thank the user for visiting
+cowsay.daemon("Thank you for visiting the Digital Cafeteria! Up until the next")
