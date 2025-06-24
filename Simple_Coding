@@ -1,0 +1,23 @@
+import cowsay
+# We import cowsay as it is a free online library
+
+
+def count_vowels(text):  # We create our own function to count the vowels
+    vowels = "aeiouAEIOU"  # This is the values of the vowels we'll count
+    count = 0  # Starting count point
+    for char in text:  # Loop through each character in the input text
+        if char in vowels:  # Chack if the character is a vowel
+            count += 1  # Operation to add 1, so we count the vowels
+
+    return count  # Makes the series stop for the next line to execute
+
+
+user_input = input("Which word do you want me to count the vowels in? ")
+
+if (
+    not user_input.isalpha()
+):  # Check if the imput is no alphabetic by adding the. isalpha
+    cowsay.cow("Input is wrong!!")
+else:
+    vowel_count = count_vowels(user_input)
+cowsay.trex(f"The number of vowels is: {vowel_count}")
