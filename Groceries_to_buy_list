@@ -1,0 +1,47 @@
+import inquirer
+
+compras = []
+opciones = [
+    inquirer.List(
+        "operations",
+        message="Qué puedo hacer por ti? ",
+        choices=[
+            "Agregar producto",
+            "Eliminar producto",
+            "Ver lista",
+            "Salir",
+        ],
+    )
+]
+
+while True:
+    respuesta = inquirer.prompt(opciones)
+    operacion = respuesta["operations"]
+
+    if operacion == "Agregar producto":
+        productos = input(
+            "Introduce los nombres de los productos separados por comas: "
+        )
+        for producto in productos.split(","):
+            producto = producto.strip()
+            if producto:
+                compras.append(producto)
+                print(f"El artículo {producto} ha sido añadido correctamente")
+
+    elif operacion == "Eliminar producto":
+        producto_2 = input("Cual es el nombre del producto? ")
+        if producto_2 in compras:
+            compras.remove(producto_2)
+            print(
+                f"El producto {producto_2} ha sido eliminado correctamente de la lista"
+            )
+
+        else:
+            print("El producto solicitado no existe")
+
+    elif operacion == "Ver lista":
+        print(f"Tu lista actual es: {compras}")
+
+    elif operacion == "Salir":
+        print("Hasta Luego")
+        break
