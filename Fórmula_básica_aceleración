@@ -1,0 +1,30 @@
+class Velocidad:
+    def __init__(self, tiempo, desplazamiento):
+        self.tiempo = tiempo
+        self.desplazamiento = desplazamiento
+
+    def calcular(self):
+        return self.desplazamiento / self.tiempo
+
+    def __str__(self):
+        return f"La velocidad constante del objeto es: {self.calcular()} metros por segundo"
+
+
+velocidad = Velocidad(5, 7)
+print(velocidad)
+
+
+class Aceleracion(Velocidad):
+    def __init__(self, tiempo, desplazamiento, intervalo_de_tiempo):
+        super().__init__(tiempo, desplazamiento)
+        self.intervalo_de_tiempo = intervalo_de_tiempo
+
+    def calculo(self):
+        return (self.desplazamiento / self.tiempo) / self.intervalo_de_tiempo
+
+    def __str__(self):
+        return f"La aceleración del objeto es: {self.calculo()} metro por segundo al cuadrado"
+
+
+aceleracion = Aceleracion(5, 7, 3)
+print(aceleracion)
