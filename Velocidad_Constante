@@ -1,0 +1,14 @@
+class Velocidad:
+    def __init__(self, tiempo, desplazamiento):
+        self.tiempo = tiempo
+        self.desplazamiento = desplazamiento
+
+    def calcular(self):
+        return self.desplazamiento / self.tiempo
+
+    def __str__(self):
+        return f"La velocidad constante del objeto es: {self.calcular()} metros por segundo"
+
+
+velocidad = Velocidad(5, 7)
+print(velocidad)
